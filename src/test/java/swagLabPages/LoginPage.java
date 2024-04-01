@@ -43,4 +43,7 @@ public class LoginPage {
         passwordInput.sendKeys("secret_sauce");
     }
 
+    public String getUrl(){
+        return driver.getCurrentUrl();
+    }
 }
