@@ -36,14 +36,16 @@ public class LoginPage {
         return hamburgerMenu.isDisplayed();
     }
 
-    public void enterValidUsername(){
-        usernameInput.sendKeys("standard_user");
+    public void enterValidUsername(String username){
+        usernameInput.sendKeys(username);
     }
-    public void enterValidPassword(){
-        passwordInput.sendKeys("secret_sauce");
+    public void enterValidPassword(String password){
+        passwordInput.sendKeys(password);
     }
 
     public String getUrl(){
         return driver.getCurrentUrl();
     }
+
+
 }

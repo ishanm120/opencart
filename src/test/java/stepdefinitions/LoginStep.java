@@ -40,8 +40,8 @@ public class LoginStep {
     }
 
     @When("User enters valid username and valid password")
-    public void enterValidUsernameAndPassword(){
-        loginPage.enterValidUsername();
-        loginPage.enterValidPassword();
+    public void enterValidUsernameAndPassword(String username,String password){
+        loginPage.enterValidUsername(username);
+        loginPage.enterValidPassword(password);
     }
 }

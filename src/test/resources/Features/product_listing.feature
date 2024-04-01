@@ -14,12 +14,12 @@ Feature: Product Listing
     Given User navigate to product listing page
     When User click on add to cart button
     And User click on cart icon
-    And User navigate to cart page
+    And User should be on cart page
     And User click on checkout button
-    And User navigate to checkout information page
+    And User should be on checkout information page
     And User enters first name as "<firstName>" last name as "<lastName>" and zipcode as "<zipCode>"
     And User click on continue button
-    And User navigate to checkout overview page
+    And User should be on checkout overview page
     And User click on finish button
     Then User should able to place order successfully
 

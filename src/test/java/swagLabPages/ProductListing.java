@@ -41,8 +41,7 @@ public class ProductListing {
     private WebElement checkoutPageTxt;
     @FindBy(xpath = "//button[@id='finish']")
     private WebElement finishBtn;
-    @FindBy(xpath = "//h2[@class='complete-header' and contains(text(),'Thank you for your order!')]")
-    private WebElement orderSuccessfulTxt;
+
 
 
     public Boolean valifyProductTxt(){
@@ -89,9 +88,11 @@ public class ProductListing {
     public void clickOnFinishBtn(){
         finishBtn.click();
     }
-    public Boolean validateOrderIsSuccessful(){
-        return orderSuccessfulTxt.isDisplayed();
+    public String validateOrderIsSuccessful(){
+        return driver.getTitle();
     }
 
-
+    public String verifyListPage(){
+        return driver.getTitle();
+    }
 }

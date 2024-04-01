@@ -19,12 +19,11 @@ public class ProductListingStep {
 
     @When("User navigate to product listing page")
     public void verifyListingPage(){
-        productListing.valifyProductTxt();
-        Assert.assertTrue(true,"Products");
+        Assert.assertTrue(productListing.valifyProductTxt(),"Product text not visible");
     }
     @Then("User should able to see list of product")
     public void verifyListOfProduct(){
-        productListing.getListOfElements();
+        Assert.assertEquals(productListing.verifyListPage(),"Product","Product title mismatch");
     }
 
     @When("User click on add to cart button")
@@ -35,17 +34,19 @@ public class ProductListingStep {
     public void clickOnCartIcon() {
         productListing.clickOnCartIcon();
     }
-    @And("User navigate to cart page")
+    @Then("User should be on cart page")
     public void navigateOnCartPage() {
-        productListing.validateCartPage();
+        Assert.assertEquals(productListing.validateCartPage(),"Your Cart","cart title mismatch");
+
     }
     @And("User click on checkout button")
     public void clickOnCheckoutBtn() {
         productListing.clickOnCheckoutBtn();
     }
-    @And("User navigate to checkout information page")
+    @Then("User should be on checkout information page")
     public void navigateOnCheckoutInformationPage() {
-        productListing.validateCheckoutInfoPage();
+        Assert.assertEquals(productListing.validateCheckoutInfoPage(),"Checkout: Your Information","checkout text mismatch");
+
     }
     @And("User enters first name as {string} last name as {string} and zipcode as {string}")
     public void entersNameAndZipcode() {
@@ -57,9 +58,10 @@ public class ProductListingStep {
     public void clickOnContinueBtn() {
         productListing.clickOnContinueBtn();
     }
-    @And("User navigate to checkout overview page")
+    @Then("User should be on checkout overview page")
     public void navigateOnCheckoutOverviewPage() {
-        productListing.validateCheckoutPage();
+        Assert.assertEquals(productListing.validateCheckoutPage(),"Checkout: Overview","checkout overview text mismatch");
+
     }
     @And("User click on finish button")
     public void clickOnFinishBtn() {
@@ -67,6 +69,7 @@ public class ProductListingStep {
     }
     @Then("User should able to place order successfully")
     public void orderPlacedSuccessfully() {
-        productListing.validateOrderIsSuccessful();
+        Assert.assertEquals(productListing.validateOrderIsSuccessful(),"Checkout: Complete!","order complete message mismatch");
+
     }
 }
