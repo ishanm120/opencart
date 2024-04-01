@@ -48,7 +48,7 @@ public class ProductListingStep {
         productListing.validateCheckoutInfoPage();
     }
     @And("User enters first name as {string} last name as {string} and zipcode as {string}")
-    public void entersNameAndZipcode(String string, String string2, String string3) {
+    public void entersNameAndZipcode() {
         productListing.enterFirstName();
         productListing.enterLastName();
         productListing.enterZipcode();
