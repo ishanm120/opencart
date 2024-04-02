@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import java.util.List;
 
 public class ProductListing {
     private WebDriver driver;
@@ -14,85 +13,71 @@ public class ProductListing {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//*[contains(text(),'Products')]")
-    private WebElement productTxt;
-
-    @FindBy(xpath ="//div[@class='inventory_item']")
-    private List<WebElement> listOfElements;
     @FindBy(xpath = "//button[@id='add-to-cart-sauce-labs-backpack']")
     private WebElement cartBtn;
     @FindBy(xpath = "//a[@class='shopping_cart_link']")
     private WebElement cartIcn;
-    @FindBy(xpath = "//span[@class='title' and contains(text(),'Your Cart')]")
-    private WebElement cartPageTitle;
     @FindBy(xpath = "//button[@id='checkout']")
     private WebElement checkoutBtn;
-    @FindBy(xpath = "//span[@class='title' and contains(text(),'Checkout: Your Information')]")
-    private WebElement checkoutInfoPageTitle;
     @FindBy(xpath = "//input[@id='first-name']")
     private WebElement firstName;
     @FindBy(xpath = "//input[@id='last-name']")
     private WebElement lastName;
     @FindBy(xpath = "//input[@id='postal-code']")
-    private WebElement zipcode;
+    private WebElement zipCode;
     @FindBy(xpath = "//input[@id='continue']")
     private WebElement continueBtn;
-    @FindBy(xpath = "//span[@class='title' and contains(text(),'Checkout: Overview')]")
-    private WebElement checkoutPageTxt;
     @FindBy(xpath = "//button[@id='finish']")
-    private WebElement finishBtn;
+    private WebElement finishButton;
+    @FindBy(xpath = "//button[@id='back-to-products']")
+    private WebElement backHomeButton;
 
 
-
-    public Boolean valifyProductTxt(){
-        return productTxt.isDisplayed();
+    public void productListingPage(){
+        driver.getTitle();
     }
 
-    public List<WebElement> getListOfElements() {
-        return listOfElements;
-
-    }
-
-    public void clickOnCartBtn(){
+    public void clickOnAddToCartBtn(){
         cartBtn.click();
     }
     public void clickOnCartIcon(){
         cartIcn.click();
     }
-    public Boolean validateCartPage(){
-       return cartPageTitle.isDisplayed();
+    public boolean cartPage(){
+       return checkoutBtn.isDisplayed();
     }
 
     public void clickOnCheckoutBtn(){
         checkoutBtn.click();
     }
-    public Boolean validateCheckoutInfoPage(){
-        return checkoutInfoPageTitle.isDisplayed();
+    public Boolean checkoutInfoPage(){
+        return continueBtn.isDisplayed();
     }
 
-    public void enterFirstName(){
-        firstName.sendKeys();
+    public ProductListing enterFirstName(String firstname){
+        firstName.sendKeys(firstname);
+        return this;
     }
-    public void enterLastName(){
-        lastName.sendKeys();
+    public ProductListing enterLastName(String lastname){
+        lastName.sendKeys(lastname);
+        return this;
     }
-    public void enterZipcode(){
-        zipcode.sendKeys();
+    public ProductListing enterZipcode(String zipcode){
+        zipCode.sendKeys(zipcode);
+        return this;
     }
     public void clickOnContinueBtn(){
         continueBtn.click();
     }
-    public Boolean validateCheckoutPage(){
-        return checkoutPageTxt.isDisplayed();
+    public Boolean checkoutPage(){
+        return finishButton.isDisplayed();
     }
-    public void clickOnFinishBtn(){
-        finishBtn.click();
+    public void clickOnFinishButton(){
+        finishButton.click();
     }
-    public String validateOrderIsSuccessful(){
-        return driver.getTitle();
+    public Boolean orderPlacedTitle(){
+        return backHomeButton.isDisplayed();
     }
 
-    public String verifyListPage(){
-        return driver.getTitle();
-    }
+
 }

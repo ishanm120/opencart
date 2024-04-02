@@ -1,7 +1,7 @@
 package stepdefinitions;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import cucumberTestContext.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -14,20 +14,20 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class Hooks {
-
     private TestContext testContext;
-
-    protected ExtentReports extent;
-    private Properties properties;
-
+    private ExtentReports extent;
 
     public Hooks(TestContext testContext) {
         this.testContext = testContext;
-
+        // Initialize ExtentReports
+        ExtentSparkReporter spark = new ExtentSparkReporter("Spark.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+        testContext.setExtent(extent); // Pass ExtentReports instance to TestContext
     }
     // method to read properties file
     private Properties loadProperties() {
-        properties = new Properties();
+        Properties properties = new Properties();
         try {
             FileInputStream fis = new FileInputStream("src/test/resources/global.properties");
             properties.load(fis);
@@ -41,10 +41,6 @@ public class Hooks {
     @Before
     public void setUp() {
         WebDriver driver;
-        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("ExtentReport.html");
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-
         ChromeOptions co = new ChromeOptions();
         co.setBrowserVersion("120");
         driver = new ChromeDriver(co);
@@ -55,11 +51,15 @@ public class Hooks {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //we set driver in testContext
         testContext.setDriver(driver);
+
     }
 
     @After
     public void tearDown() {
         testContext.getDriver().quit();
+        // ExtentReports teardown
+        extent.flush();
+
     }
 }
 
