@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import constants.Constants;
 import cucumberTestContext.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,8 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.*;
-import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class Hooks {
     private TestContext testContext;
@@ -48,7 +49,7 @@ public class Hooks {
         String baseURL = loadProperties().getProperty("baseUrl");
         driver.get(baseURL);
         //impicit wait
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Constants.IMPLICIT_WAIT, TimeUnit.SECONDS);
         //we set driver in testContext
         testContext.setDriver(driver);
 

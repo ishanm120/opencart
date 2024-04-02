@@ -17,7 +17,6 @@ public class LoginStep {
     private final LoginPage loginPage;
     private ExtentReports extent;
 
-
     public LoginStep(TestContext testContext) {
         this.driver = testContext.getDriver();
         loginPage = new LoginPage(driver);
@@ -45,7 +44,6 @@ public class LoginStep {
     @Then("User should be logged in successfully")
     public void verifyLoginSuccessful() throws InterruptedException {
         loginPage.clickOnHamburgerMenu();
-        Thread.sleep(500);
         Assert.assertTrue(loginPage.logoutButton(), "user is not able to login");
         extent.createTest("Verify Login should be Successful.").log(Status.PASS, "Login Successful.");
     }

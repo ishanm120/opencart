@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductListing {
+public class ProductListingPage {
     private WebDriver driver;
 
-    public ProductListing(WebDriver driver) {
+    public ProductListingPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -54,15 +54,15 @@ public class ProductListing {
         return continueBtn.isDisplayed();
     }
 
-    public ProductListing enterFirstName(String firstname){
+    public ProductListingPage enterFirstName(String firstname){
         firstName.sendKeys(firstname);
         return this;
     }
-    public ProductListing enterLastName(String lastname){
+    public ProductListingPage enterLastName(String lastname){
         lastName.sendKeys(lastname);
         return this;
     }
-    public ProductListing enterZipcode(String zipcode){
+    public ProductListingPage enterZipcode(String zipcode){
         zipCode.sendKeys(zipcode);
         return this;
     }
@@ -78,6 +78,5 @@ public class ProductListing {
     public Boolean orderPlacedTitle(){
         return backHomeButton.isDisplayed();
     }
-
 
 }
