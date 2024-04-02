@@ -23,24 +23,30 @@ public class LoginPage {
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
     private WebElement hamburgerMenu;
 
-    public void enterUsername(String username) {
-        usernameInput.sendKeys(username);
+    @FindBy(xpath = "//a[@id='logout_sidebar_link']")
+    private WebElement logoutBtn;
+
+
+    public Boolean verifyLoginButton(){
+        return loginButton.isDisplayed();
     }
-    public void enterPassword(String password) {
+    public LoginPage enterUsername(String username) {
+        usernameInput.sendKeys(username);
+        return this;
+    }
+    public LoginPage enterPassword(String password) {
         passwordInput.sendKeys(password);
+        return this;
     }
     public void clickOnLoginBtn() {
         loginButton.click();
     }
-    public Boolean verifyHamburgerMenu(){
-        return hamburgerMenu.isDisplayed();
+    public void clickOnHamburgerMenu(){
+        hamburgerMenu.click();
     }
 
-    public void enterValidUsername(){
-        usernameInput.sendKeys("standard_user");
-    }
-    public void enterValidPassword(){
-        passwordInput.sendKeys("secret_sauce");
+    public Boolean logoutButton(){
+        return logoutBtn.isDisplayed();
     }
 
 }
