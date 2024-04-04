@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/Features",
         glue = {"stepdefinitions"},
-        tags = "@ProductList and @RunBackground",
+        tags = "@ProductList",
         plugin = {"pretty", "html:target/cucumber-reports"}
 
 )

@@ -1,12 +1,17 @@
 package swagLabPages;
 
+import constants.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class ProductListingPage {
     private WebDriver driver;
+    private Select select;
 
     public ProductListingPage(WebDriver driver) {
         this.driver = driver;
@@ -31,6 +36,10 @@ public class ProductListingPage {
     private WebElement finishButton;
     @FindBy(xpath = "//button[@id='back-to-products']")
     private WebElement backHomeButton;
+    @FindBy(xpath = "//select[@class='product_sort_container']")
+    private WebElement filterDropdown;
+    @FindBy(xpath = "//*[@class ='inventory_item_name ']")
+    private List<WebElement> productsNameFromAToZ;
 
 
     public void productListingPage(){
@@ -78,5 +87,15 @@ public class ProductListingPage {
     public Boolean orderPlacedTitle(){
         return backHomeButton.isDisplayed();
     }
+    public void clickOnFilterBtn(){
+        filterDropdown.click();
+    }
+    public void selectNameFilterAsAToZ() {
+        select = new Select(filterDropdown);
+        select.selectByVisibleText(Constants.NAME_A_TO_Z);
+    }
 
+    public List<WebElement> getListOfElements() {
+        return productsNameFromAToZ;
+    }
 }

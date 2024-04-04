@@ -5,6 +5,7 @@ import com.aventstack.extentreports.Status;
 import constants.Constants;
 import cucumberTestContext.TestContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +26,7 @@ public class ProductListingStep {
         extent = testContext.getExtent();
     }
 
-    @When("User navigate to product listing page")
+    @Given("User navigate to product listing page")
     public void navigateOnListingPage(){
        productListing.productListingPage();
        extent.createTest("Navigate on product listing page.").log(Status.PASS, "navigate on product listing page successfully.");
@@ -85,4 +86,22 @@ public class ProductListingStep {
         Assert.assertTrue(productListing.orderPlacedTitle(),"order successful page is not visible");
         extent.createTest("Verify order is placed.").log(Status.PASS, "Verify order is placed successfully.");
     }
+
+    @When("User click on filter icon")
+    public void clickOnFilterIcon() {
+        productListing.clickOnFilterBtn();
+    }
+    @And("User select name filter as A to Z")
+    public void selectNameFilterAsAToZ() {
+        productListing.selectNameFilterAsAToZ();
+    }
+    @Then("List of product should be displayed as name A to Z")
+    public void productListDisplayedFromA() {
+        Assert.assertEquals(productListing.getListOfElements().size(),6);
+
+    }
+
+
+
+
 }

@@ -1,6 +1,5 @@
-package basePage;
+package commonPage;
 
-import constants.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +12,6 @@ public class CommonMethodPage {
 
     public CommonMethodPage(WebDriver driver){
         this.driver = driver;
-        wait = new WebDriverWait(driver,Duration.ofSeconds(Constants.EXPLICIT_WAIT));
     }
 
     //method for wait until element to be visible
@@ -24,5 +22,11 @@ public class CommonMethodPage {
     //method for wait until element to be clickable
     public void elementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    // Method of explicit wait for a specific element with a custom time
+    protected WebElement waitForElement(WebElement element, Duration timeout) {
+        wait = new WebDriverWait(driver, timeout);
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 }

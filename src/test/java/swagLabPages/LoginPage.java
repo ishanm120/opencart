@@ -1,6 +1,6 @@
 package swagLabPages;
 
-import basePage.CommonMethodPage;
+import commonPage.CommonMethodPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,7 +49,7 @@ public class LoginPage {
         hamburgerMenu.click();
     }
 
-    public boolean logoutButton(){
+    public Boolean logoutButton(){
         return basePage.elementToBeVisible(logoutBtn).isDisplayed();
     }
 
