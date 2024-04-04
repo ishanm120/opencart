@@ -20,21 +20,24 @@ public class CartPageSteps {
         cartPage = new CartPage(driver);
         extent = testContext.getExtent();
     }
-    @And("User click on remove button")
-    public void clickOnRemoveButton(){
-        cartPage.clickOnRemoveButton();
+    @And("User click on remove button on cart page")
+    public void clickOnRemoveButtonOnCartPage(){
+        cartPage.clickOnRemoveButtonOnCartPage();
     }
     @Then("Verify product should be removed from the cart")
-    public void verifyRemoveButtonShouldNotBeThere(){
-        Assert.assertFalse(cartPage.verifyRemoveButtonShouldNotBeThere(),"Element found");
+    public void verifyRemoveButtonShouldNotBeThereOnCartPage(){
+        Assert.assertFalse(cartPage.verifyRemoveButtonShouldNotBeThereOnCartPage(),"Element found");
     }
-    @And("User click on continue shopping button")
-    public void clickOnContinueShoppingButton(){
-        cartPage.clickOnContinueShoppingButton();
+    @And("User click on continue shopping button on cart page")
+    public void clickOnContinueShoppingButtonOnCartPage(){
+        cartPage.clickOnContinueShoppingButtonOnCartPage();
     }
-    @Then("Verify User should navigate to listing page")
-    public void verifyUserIsOnListingPage(){
-        Assert.assertEquals("Products",cartPage.verifyUserIsOnListingPage(),"Text mismatch");
+
+    @Then("Verify product title detail and price is available on cart page")
+    public void verifyProductTitleDetailPriceAvailableOnCartPage(){
+        Assert.assertTrue(cartPage.getProductTitle(),"title is missing on cart page");
+        Assert.assertTrue(cartPage.getProductDetail(),"Product Detail is missing on cart page");
+        Assert.assertTrue(cartPage.getProductPrice(),"Product price is missing from cart page");
     }
 
 }

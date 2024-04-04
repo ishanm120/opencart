@@ -15,24 +15,39 @@ public class CartPage {
     private WebElement removeButton;
     @FindBy(xpath = "//button[@id='continue-shopping']")
     private WebElement continueShopping;
-    @FindBy(xpath = "//span[text()='Products']")
-    private WebElement listItems;
-    public void clickOnRemoveButton(){
+    @FindBy(xpath = "//a[@id='item_4_title_link']")
+    private WebElement productTitle;
+    @FindBy(xpath = "//div[@class='inventory_item_desc']")
+    private WebElement productDetail;
+    @FindBy(xpath = "//div[@class='inventory_item_price']")
+    private WebElement productPrice;
+
+
+    public void clickOnRemoveButtonOnCartPage(){
         removeButton.click();
     }
-
-    public Boolean verifyRemoveButtonShouldNotBeThere(){
+    public Boolean verifyRemoveButtonShouldNotBeThereOnCartPage(){
         try{
             return removeButton.isDisplayed();
         }catch (Exception e){
             return false;
         }
     }
-    public void clickOnContinueShoppingButton(){
+    public void clickOnContinueShoppingButtonOnCartPage(){
         continueShopping.click();
     }
-    public String verifyUserIsOnListingPage(){
-        return listItems.getText();
+
+    public Boolean getProductTitle(){
+        productTitle.isDisplayed();
+        return true;
+    }
+    public Boolean getProductDetail(){
+        productDetail.isDisplayed();
+        return true;
+    }
+    public Boolean getProductPrice(){
+        productPrice.isDisplayed();
+        return true;
     }
 
 }
