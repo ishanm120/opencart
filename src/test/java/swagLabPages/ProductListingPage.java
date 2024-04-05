@@ -1,14 +1,19 @@
 package swagLabPages;
 
+import constants.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
-public class ProductListing {
+import java.util.List;
+
+public class ProductListingPage {
     private WebDriver driver;
+    private Select select;
 
-    public ProductListing(WebDriver driver) {
+    public ProductListingPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -31,6 +36,10 @@ public class ProductListing {
     private WebElement finishButton;
     @FindBy(xpath = "//button[@id='back-to-products']")
     private WebElement backHomeButton;
+    @FindBy(xpath = "//select[@class='product_sort_container']")
+    private WebElement filterDropdown;
+    @FindBy(xpath = "//*[@class ='inventory_item_name ']")
+    private List<WebElement> productsNameFromAToZ;
 
 
     public void productListingPage(){
@@ -54,15 +63,15 @@ public class ProductListing {
         return continueBtn.isDisplayed();
     }
 
-    public ProductListing enterFirstName(String firstname){
+    public ProductListingPage enterFirstName(String firstname){
         firstName.sendKeys(firstname);
         return this;
     }
-    public ProductListing enterLastName(String lastname){
+    public ProductListingPage enterLastName(String lastname){
         lastName.sendKeys(lastname);
         return this;
     }
-    public ProductListing enterZipcode(String zipcode){
+    public ProductListingPage enterZipcode(String zipcode){
         zipCode.sendKeys(zipcode);
         return this;
     }
@@ -78,6 +87,15 @@ public class ProductListing {
     public Boolean orderPlacedTitle(){
         return backHomeButton.isDisplayed();
     }
+    public void clickOnFilterBtn(){
+        filterDropdown.click();
+    }
+    public void selectNameFilterAsAToZ() {
+        select = new Select(filterDropdown);
+        select.selectByVisibleText(Constants.NAME_A_TO_Z);
+    }
 
-
+    public List<WebElement> getListOfElements() {
+        return productsNameFromAToZ;
+    }
 }

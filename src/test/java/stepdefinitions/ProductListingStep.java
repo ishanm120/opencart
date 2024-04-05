@@ -3,7 +3,7 @@ package stepdefinitions;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
 import cucumberTestContext.TestContext;
-import io.cucumber.java.StepDefinitionAnnotation;
+import constants.Constants;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,22 +11,22 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import swagLabPages.LoginPage;
-import swagLabPages.ProductListing;
+import swagLabPages.ProductListingPage;
 
 public class ProductListingStep {
     private WebDriver driver;
-    private final ProductListing productListing;
+    private final ProductListingPage productListing;
     private final LoginPage loginPage;
     private ExtentReports extent;
 
     public ProductListingStep(TestContext testContext) {
         this.driver = testContext.getDriver();
-        productListing = new ProductListing(driver);
+        productListing = new ProductListingPage(driver);
         loginPage = new LoginPage(driver);
         extent = testContext.getExtent();
     }
 
-    @When("User navigate to product listing page")
+    @Given("User navigate to product listing page")
     public void navigateOnListingPage(){
        productListing.productListingPage();
        extent.createTest("Navigate on product listing page.").log(Status.PASS, "navigate on product listing page successfully.");
@@ -57,11 +57,12 @@ public class ProductListingStep {
         Assert.assertTrue(productListing.checkoutInfoPage(),"checkout info page not visible");
         extent.createTest("Verify checkout info page.").log(Status.PASS, "Verify checkout info page successfully.");
     }
+
     @And("User enters firstName as {string} lastName as {string} and zipcode as {string}")
-    public void entersNameAndZipcode(String firstname, String lastname, String zipcode) {
-        productListing.enterFirstName(firstname)
-                      .enterLastName(lastname)
-                      .enterZipcode(zipcode);
+    public void entersNameAndZipcode(String FIRST_NAME,String LAST_NAME, String ZIP_CODE) {
+        productListing.enterFirstName(Constants.FIRST_NAME)
+                      .enterLastName(Constants.LAST_NAME)
+                      .enterZipcode(Constants.ZIP_CODE);
         extent.createTest("Enter firstname, lastname and zipcode.").log(Status.PASS, "Enter firstname, lastname and zipcode successfully.");
 
     }
@@ -84,5 +85,19 @@ public class ProductListingStep {
     public void verifyOrderPlacedSuccessfully() {
         Assert.assertTrue(productListing.orderPlacedTitle(),"order successful page is not visible");
         extent.createTest("Verify order is placed.").log(Status.PASS, "Verify order is placed successfully.");
+    }
+
+    @When("User click on filter icon")
+    public void clickOnFilterIcon() {
+        productListing.clickOnFilterBtn();
+    }
+    @And("User select name filter as A to Z")
+    public void selectNameFilterAsAToZ() {
+        productListing.selectNameFilterAsAToZ();
+    }
+    @Then("List of product should be displayed as name A to Z")
+    public void productListDisplayedFromA() {
+        Assert.assertEquals(productListing.getListOfElements().size(),6);
+
     }
 }
