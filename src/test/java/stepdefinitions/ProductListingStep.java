@@ -85,4 +85,17 @@ public class ProductListingStep {
         Assert.assertTrue(productListing.orderPlacedTitle(),"order successful page is not visible");
         extent.createTest("Verify order is placed.").log(Status.PASS, "Verify order is placed successfully.");
     }
+    @When("User add {int} products in cart")
+    public void addMultipleProductInCart(int productCount){
+        productListing.addMultipleProductsIntoCart(productCount);
+    }
+    @Then("Verify {int} of product in cart")
+    public void verifyProductCount(int expectedProductCount){
+        Assert.assertEquals(productListing.getCountOfProductInCart(),expectedProductCount,"Product Count in cart is different");
+    }
+    @Then("Verify User should navigate to listing page")
+    public void verifyUserIsOnListingPage(){
+        Assert.assertEquals("Products",productListing.verifyUserIsOnListingPage(),"Text mismatch");
+        Assert.assertEquals("https://www.saucedemo.com/inventory.html",productListing.getUrlOfListingPage(),"Url mismatch"+ productListing.getUrlOfListingPage());
+    }
 }
