@@ -1,5 +1,4 @@
 Feature: Product Listing
-
   Background:
     Given User enters username as "standard_user" and password as "secret_sauce"
     And User click on login button

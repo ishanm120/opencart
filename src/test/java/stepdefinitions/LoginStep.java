@@ -47,5 +47,4 @@ public class LoginStep {
         Assert.assertTrue(loginPage.logoutButton(), "user is not able to login");
         extent.createTest("Verify Login should be Successful.").log(Status.PASS, "Login Successful.");
     }
-
 }

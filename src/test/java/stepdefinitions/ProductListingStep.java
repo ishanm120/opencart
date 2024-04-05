@@ -2,8 +2,8 @@ package stepdefinitions;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
-import constants.Constants;
 import cucumberTestContext.TestContext;
+import constants.Constants;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -100,8 +100,4 @@ public class ProductListingStep {
         Assert.assertEquals(productListing.getListOfElements().size(),6);
 
     }
-
-
-
-
 }
